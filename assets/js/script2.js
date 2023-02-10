@@ -2,37 +2,29 @@ const addBtn = document.querySelector('.add'),
   substractBtn = document.querySelector('.substract'),
   drawingPage = document.querySelector('.drawing-page'),
   drawingBox = document.querySelector('.drawing-box'),
-  numbers = document.querySelector('#numbers'),
-  colors = document.querySelector('#colors'),
+  numbers = document.querySelector('.numbers'),
+  colors = document.querySelector('.colors'),
   clearBtn = document.querySelector('.clear-btn'),
-  canvas = document.querySelector('#drawing-board'),
+  canvas = document.querySelector('.drawing-board'),
   ctx = canvas.getContext('2d'),
   drawingPageWidth = drawingPage.clientWidth,
-  drawingPageHeight = drawingPage.clientHeight;
-
-const canvasOffsetX = canvas.offsetLeft;
-const canvasOffsetY = canvas.offsetTop;
+  drawingPageHeight = drawingPage.clientHeight,
+  canvasOffsetX = canvas.offsetLeft,
+  canvasOffsetY = canvas.offsetTop;
 
 canvas.width = drawingPageWidth;
 canvas.height = drawingPageHeight;
 
 let isPainting = false;
 let lineWidth = 5;
-let startX;
-let startY;
 numbers.innerText = lineWidth;
 
-clearBtn.addEventListener('click', e => {
+clearBtn.addEventListener('click', () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 });
 
-drawingBox.addEventListener('change', e => {
-  if (e.target.id === 'colors') {
-    ctx.strokeStyle = e.target.value;
-  }
-  if (e.target.id === 'numbers') {
-    lineWidth = e.target.value;
-  }
+colors.addEventListener('change', e => {
+  ctx.strokeStyle = e.target.value;
 });
 
 const draw = (e) => {
@@ -42,19 +34,16 @@ const draw = (e) => {
   ctx.lineWidth = lineWidth;
   ctx.lineCap = 'round';
   ctx.lineTo(e.clientX - canvasOffsetX, e.clientY - canvasOffsetY);
-  // ctx.lineTo(e.clientX, e.clientY);
   ctx.stroke();
 }
 
 canvas.addEventListener('mousemove', draw);
 
-canvas.addEventListener('mousedown', e => {
+canvas.addEventListener('mousedown', () => {
   isPainting = true;
-  startX = e.clientX;
-  startY = e.clientY;
-  ctx.beginPath();
 });
-canvas.addEventListener('mouseup', e => {
+
+canvas.addEventListener('mouseup', () => {
   isPainting = false;
   ctx.beginPath();
 });

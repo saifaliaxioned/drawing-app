@@ -156,16 +156,12 @@ img.colorpick-eyedropper-input-trigger { display: none !important;}
   cursor: pointer; 
 }
 
-input#colors {
+input.colors {
   width: 30px !important;
 }
 
 .drawing-items li:hover:not(:nth-child(2)),.clear-btn:hover {
   background-color: #ced3d3;
-}
-
-.colors {
-  padding: 10px;
 }
 
 
